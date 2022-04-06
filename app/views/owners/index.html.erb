@@ -4,6 +4,7 @@
     <%= link_to "Create New Owner Here", new_owner_path %>
 </div>
 
+<h2>Entries so far:</h2>
 <% @owners.each do |owner| %>
     <table>
         <tr>
@@ -16,7 +17,8 @@
         </tr>
     </table>
     <div>
-        <%= link_to "EDIT", edit_owner_path(owner) %> | <%= link_to "DELETE", owner_path(owner), data: {
+          <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
+          <%= link_to "DELETE", owner_path(owner), data: {
             turbo_method: "DELETE",
             turbo_confirm: "ARE YOU SURE?!"
         } %>

@@ -14,7 +14,7 @@
         <tr>
             <td> <strong>Contact Details</strong> </td>
             <td><%= owner.tel_num %></td>
-        </tr>
+        </tr> 
     </table>
     <div>
           <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
@@ -22,7 +22,7 @@
             turbo_method: "DELETE",
             turbo_confirm: "ARE YOU SURE?!"
         } %>
-    </div>
+    </div> <br>
 <% end %>
 
 

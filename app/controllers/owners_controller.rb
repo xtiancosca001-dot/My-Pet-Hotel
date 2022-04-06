@@ -20,6 +20,12 @@ class OwnersController < ApplicationController
         end
     end
 
+    # Show an Onwer
+    def show
+        @owner = Owner.find(params[:id])
+    end
+    
+
     # Edit an Owner
     def edit
         @owner = Owner.find(params[:id])

@@ -16,13 +16,17 @@
             <td><%= owner.tel_num %></td>
         </tr> 
     </table>
-    <div>
-          <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
-          <%= link_to "DELETE", owner_path(owner), data: {
-            turbo_method: "DELETE",
-            turbo_confirm: "ARE YOU SURE?!"
-        } %>
-    </div> <br>
+
+    <% unless owner.archived? %> <!--THIS CAUSES THE BUG!!!-->
+        <div>
+            <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
+            <%= link_to "DELETE", owner_path(owner), data: {
+                turbo_method: "DELETE",
+                turbo_confirm: "ARE YOU SURE?!"
+            } %>
+        </div> 
+    <% end %>
+    <br>
 <% end %>
 
 

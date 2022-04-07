@@ -1,3 +1,5 @@
-<ul>
-    <li><strong><%= pet.name %></strong> <em>(<%= pet.pet_type %>)</em></li>
-</ul>
+<% unless pet.archived? %> <!--THIS CAUSES THE BUG!!-->
+    <ul>
+        <li><strong><%= pet.name %></strong> <em>(<%= pet.pet_type %>)</em></li>
+    </ul>
+<% end %>

@@ -50,6 +50,6 @@ class OwnersController < ApplicationController
     
     private
         def req_params
-            params.require(:owner).permit(:name, :tel_num)
+            params.require(:owner).permit(:name, :tel_num, :status)
         end
 end

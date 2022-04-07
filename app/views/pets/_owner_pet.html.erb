@@ -10,6 +10,13 @@
         </tr>
     </table>
     <div>
+        <%= owners_pet.label :status %><br>
+        <%= owners_pet.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    </div>
+    <br>
+    <div>
         <%= owners_pet.submit 'Add the Pet' %>
     </div>
+
+    
 <% end %>

@@ -10,6 +10,11 @@
         </tr>
     </table>
     <div>
+        <%= owner.label :status %><br>
+        <%= owner.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    </div>
+    <br>
+    <div>
         <%= owner.submit %>
     </div>
 <% end %>

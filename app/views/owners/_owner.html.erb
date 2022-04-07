@@ -1,0 +1,15 @@
+<%= form_with model: @owner do |owner| %>
+    <table>
+        <tr>
+            <td><%= owner.label :name %></td>
+            <td><%= owner.text_field :name %></td>
+        </tr>
+        <tr>
+            <td><%= owner.label :tel_num %></td>
+            <td><%= owner.text_field :tel_num %></td>
+        </tr>
+    </table>
+    <div>
+        <%= owner.submit %>
+    </div>
+<% end %>

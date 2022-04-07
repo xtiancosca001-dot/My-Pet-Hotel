@@ -1,0 +1,15 @@
+<%= form_with model: [ @owner, @owner.pets.build ] do |owners_pet| %>
+    <table>
+        <tr>
+            <td><%= owners_pet.label :name %></td>
+            <td><%= owners_pet.text_field :name %></td>
+        </tr>
+        <tr>
+            <td><%= owners_pet.label :pet_type %></td>
+            <td><%= owners_pet.select :pet_type, ['Dog', 'Cat'] %></td>
+        </tr>
+    </table>
+    <div>
+        <%= owners_pet.submit 'Add the Pet' %>
+    </div>
+<% end %>

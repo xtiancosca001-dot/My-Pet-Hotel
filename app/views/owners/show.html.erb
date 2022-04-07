@@ -3,18 +3,8 @@
 <%= link_to "Go Back", owners_path%>
 
 <h2>List of Pets Owned</h2>
-<% @owner.pets.each do |pet|%>
-    <table>
-        <tr>
-            <td> <strong>Name</strong> </td>
-            <td><%= pet.name %></td>
-        </tr>
-        <tr>
-            <td> <strong>Type</strong> </td>
-            <td><%= pet.pet_type %></td>
-        </tr>
-    </table>
-<% end %>
+<%= render @owner.pets %>
+
 
 <hr>
 <h2>Add a pet here</h2>

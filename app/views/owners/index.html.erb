@@ -18,7 +18,9 @@ Our Organization has <%= Owner.public_count %> pet owners and counting!
             <td><%= owner.tel_num %></td>
         </tr> 
     </table>
-
+    <% if owner.archived? %>
+        ARCHIVED!!! <br>
+    <% end %>
     <% unless owner.archived? %> <!--BUG RESOLVED!-->
         <div>
             <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
@@ -28,6 +30,7 @@ Our Organization has <%= Owner.public_count %> pet owners and counting!
             } %>
         </div> 
     <% end %>
+    
     <br>
 <% end %>
 

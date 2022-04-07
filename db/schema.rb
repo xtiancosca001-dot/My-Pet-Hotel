@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_06_041216) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_07_041308) do
   create_table "owners", force: :cascade do |t|
     t.string "name"
     t.string "tel_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
   end
 
   create_table "pets", force: :cascade do |t|
@@ -24,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_06_041216) do
     t.integer "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
     t.index ["owner_id"], name: "index_pets_on_owner_id"
   end
 

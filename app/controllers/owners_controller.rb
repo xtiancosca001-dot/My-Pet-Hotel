@@ -44,12 +44,12 @@ class OwnersController < ApplicationController
     def destroy
         @owner = Owner.find(params[:id])
         @owner.destroy
-        redirect_to owners_path, status: :see_other
+        redirect_to root_path, status: :see_other
     end
     
     
     private
         def req_params
-            params.require(:owner).permit(:name, :tel_num)
+            params.require(:owner).permit(:name, :tel_num, :status)
         end
 end

@@ -19,7 +19,7 @@ Our Organization has <%= Owner.public_count %> pet owners and counting!
         </tr> 
     </table>
 
-    <% unless owner.archived? %> <!--THIS CAUSES THE BUG!!!-->
+    <% unless owner.archived? %> <!--BUG RESOLVED!-->
         <div>
             <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
             <%= link_to "DELETE", owner_path(owner), data: {

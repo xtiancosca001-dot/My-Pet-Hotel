@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   # Pets as nested resource within Owners
   resources :owners do
-    resources :pets
+    resources :pets do 
+      resources :pet_bookings
+    end
   end
 end

@@ -3,7 +3,7 @@ class PetBookingsController < ApplicationController
         @owner = Owner.find(params[:owner_id])
         @pet = @owner.pets.find(params[:pet_id])
         @booking = @pet.pet_bookings.create(book_params)
-        redirect_to pet_path(@pet)
+        redirect_to owner_pet_path(@pet)
     end
 
     def destroy
@@ -11,12 +11,12 @@ class PetBookingsController < ApplicationController
         @pet = @owner.pets.find(params[:pet_id])
         @booking = @pet.pet_bookings.find(params[:id])
         @booking.destroy 
-        redirect_to pet_path(@pet), status: 303
+        redirect_to owner_pet_path(@pet), status: 303
     end
     
     private
         def book_params
-            params.require(:pet_booking).permit(:start_date, :end_date, :status)
+            params.require(:pet_booking).permit(:start_date, :end_date, :cage_num, :status)
         end
         
 end

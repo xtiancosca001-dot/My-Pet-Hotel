@@ -5,6 +5,12 @@ class PetsController < ApplicationController
         redirect_to owner_path(@owner)
     end
 
+    def show
+        @owner = Owner.find(params[:owner_id])
+        @pet = @owner.pets.find(params[:id])
+    end
+    
+
     def destroy
         @owner = Owner.find(params[:owner_id])
         @pet = @owner.pets.find(params[:id])

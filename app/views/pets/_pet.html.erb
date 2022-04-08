@@ -1,6 +1,6 @@
 <% unless pet.archived? %>  <!--BUG RESOLVED!-->
     <ul>
-        <li><strong><%= pet.name %></strong> <em>(<%= pet.pet_type %>)</em> | <%= link_to "Remove Pet", [pet.owner, pet], data: {
+        <li><strong><%= link_to pet.name, [pet.owner, pet] %></strong> <em>(<%= pet.pet_type %>)</em> | <%= link_to "Remove Pet", [pet.owner, pet], data: {
             turbo_method: :delete,
             turbo_confirm: "Say Goodbye to your Pet?!"
         } %></li>

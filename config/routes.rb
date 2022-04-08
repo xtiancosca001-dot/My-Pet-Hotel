@@ -6,9 +6,11 @@ Rails.application.routes.draw do
   root "owners#index"
 
   # Pets as nested resource within Owners
+
   resources :owners do
     resources :pets do 
       resources :pet_bookings
     end
   end
+
 end

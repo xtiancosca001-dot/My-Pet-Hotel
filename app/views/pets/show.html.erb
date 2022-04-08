@@ -1,0 +1,7 @@
+<h1> <%= @pet.name %> the <%= @pet.pet_type %> </h1>
+<%= link_to 'Go Back', owner_path(@owner) %>
+<hr>
+<h2>BOOKINGS</h2>
+<p>--Book A Slot Now--</p>
+<%= render 'pet_bookings/booking' %>
+

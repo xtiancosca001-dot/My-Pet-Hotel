@@ -1,4 +1,10 @@
 class PetBookingsController < ApplicationController
+    def index
+        @owner = Owner.find(params[:owner_id])
+        @pet = @owner.pets.find(params[:pet_id])
+        @booking = @pet.pet_bookings.all
+    end
+    
     def create
         @owner = Owner.find(params[:owner_id])
         @pet = @owner.pets.find(params[:pet_id])

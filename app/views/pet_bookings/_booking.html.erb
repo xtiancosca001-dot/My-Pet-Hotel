@@ -1,26 +1,24 @@
-<%= form_with model: [ @owner, @owner.pets ] do |pet| %>
-    <% pet.field_for :pet_bookings do |booking|%>
-        <table>
-            <tr>
-                <td><%= booking.label :start_date %></td>
-                <td><%= booking.date_field :start_date %></td>
-            </tr>
-            <tr>
-                <td><%= booking.label :end_date %></td>
-                <td><%= booking.date_field :end_date %></td>
-            </tr>
-            <tr>
-                <td><%= booking.label :cage_num %></td>
-                <td><%= booking.text_field :cage_num %></td>
-            </tr>
-        </table>
-        <div>
-            <%= booking.label :status %><br>
-            <%= booking.select :status, ['public', 'private', 'archived'], selected: 'public' %>
-        </div>
-        <br>
-        <div>
-            <%= booking.submit 'Add the Pet Booking' %>
-        </div>
-    <% end %>
+<%= form_with model: [ @pet, @pet.pet_bookings.build ] do |booking| %>
+    <table>
+        <tr>
+            <td><%= booking.label :start_date %></td>
+            <td><%= booking.date_field :start_date %></td>
+        </tr>
+        <tr>
+            <td><%= booking.label :end_date %></td>
+            <td><%= booking.date_field :end_date %></td>
+        </tr>
+        <tr>
+            <td><%= booking.label :cage_num %></td>
+            <td><%= booking.text_field :cage_num %></td>
+        </tr>
+    </table>
+    <div>
+        <%= booking.label :status %><br>
+        <%= booking.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    </div>
+    <br>
+    <div>
+        <%= booking.submit 'Add the Pet Booking' %>
+    </div>
 <% end %>

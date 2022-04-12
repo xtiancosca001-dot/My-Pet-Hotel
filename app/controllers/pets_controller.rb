@@ -1,18 +1,35 @@
 class PetsController < ApplicationController
     def new
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.new
+        @pet = Pet.new
+    end
+
+    def index
+        if params[:owner_id]
+            @owner = Owner.find(params[:owner_id])
+            @pets = @owner.pets
+        else 
+            @pets = Pet.all
+        end
     end
     
     def create
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.create(pet_params)
+        if params[:owner_id]
+            @owner = Owner.find(params[:owner_id])
+            @pet = @owner.create(pet_params)
+        else 
+            @pet = Pet.create(pet_params)
+        end
         redirect_to owner_path(@owner)
     end
 
     def show
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.find(params[:id])
+        if params[:owner_id]
+            @owner = Owner.find(params[:owner_id])
+            @pet = @owner.pets.find(params[:id])
+        else 
+            @pet = Pet.find(params[:id])
+        end
+        
     end
 
     def update

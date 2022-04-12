@@ -1,12 +1,7 @@
 class PetBookingsController < ApplicationController
-    def new
-        @owner = Owner.new
-        @owner.pets.pet_bookings.build
-    end
-    
     def create
         @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.find(params[:id])
+        @pet = @owner.find(params[:id])
         @booking = @pet.pet_bookings.create(book_params)
         redirect_to owner_pet_path(@pet)
     end

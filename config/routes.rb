@@ -15,4 +15,6 @@ Rails.application.routes.draw do
     resources :pet_bookings
   end
 
+  resources :pet_bookings
+
 end

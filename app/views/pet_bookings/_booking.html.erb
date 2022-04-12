@@ -1,6 +1,8 @@
-<%= form_with model: [ @pet, @pet.pet_bookings.build ] do |booking| %>
+<%= form_with model: @booking do |booking| %>
     <table>
-        <p><%= booking %></p>
+        <p><%= @pet.pet_bookings %></p>
+        <p>TESTING: <%= booking %></p>
+        <p><%=params%></p>
         <tr>
             <td><%= booking.label :start_date %></td>
             <td><%= booking.date_field :start_date %></td>

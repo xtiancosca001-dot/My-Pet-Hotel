@@ -5,6 +5,7 @@ class CreatePetBookings < ActiveRecord::Migration[7.0]
       t.date :end_date
       t.integer :cage_num
       t.references :pet, null: false, foreign_key: true
+      t.references :owner, null: false, foreign_key: true
 
       t.timestamps
     end

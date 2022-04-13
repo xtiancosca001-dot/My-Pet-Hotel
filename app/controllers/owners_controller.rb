@@ -14,8 +14,10 @@ class OwnersController < ApplicationController
         # Creates an instance and redirects
         @owner = Owner.new(req_params)
         if @owner.save
+            flash[:success] = "Owner was successfully created"
             redirect_to owners_path
         else
+            flash[:error] = "Something went wrong"
             render :new, status: :unprocessable_entity
         end
     end

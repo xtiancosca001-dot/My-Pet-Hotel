@@ -1,13 +1,26 @@
 class PetBookingsController < ApplicationController
+    def index
+        @owner = Owner.find_by(params[:owner_id])
+        @pet = @owner.pet.find_by(params[:id])
+        @booking = @pet.pet_bookings
+    end
+
+    def new
+        @owner = Owner.find_by(params[:owner_id])
+        @pet = @owner.pets.find(params[:id])
+        @booking = @pet.pet_booking.new
+    end
+    
+
     def create
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.find(params[:id])
+        @owner = Owner.find_by(params[:owner_id])
+        @pet = @owner.pets.find(params[:id])
         @booking = @pet.pet_bookings.create(book_params)
         redirect_to owner_pet_path(@pet)
     end
 
     def destroy
-        @owner = Owner.find(params[:owner_id])
+        @owner = Owner.find_by(params[:owner_id])
         @pet = @owner.pets.find(params[:id])
         @booking = @pet.pet_bookings.find(params[:id])
         @booking.destroy 

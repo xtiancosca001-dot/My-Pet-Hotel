@@ -1,6 +1,7 @@
 <%= form_with model: [ @pet, @pet.pet_bookings.build ] do |booking| %>
+    <h3><%=[ @pet, @pet.pet_bookings]%></h3>
     <table>
-        <p><%= @pet.pet_bookings %></p>
+        <p><%= @pet %></p>
         <p>TESTING: <%= booking %></p>
         <p><%=params%></p>
         <tr>

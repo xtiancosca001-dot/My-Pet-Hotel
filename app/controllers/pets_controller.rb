@@ -1,39 +1,22 @@
 class PetsController < ApplicationController
-    def new
-        @pet = Pet.new
-    end
-
     def index
-        if params[:owner_id]
-            @owner = Owner.find(params[:owner_id])
-            @pets = @owner.pets
-        else 
-            @pets = Pet.all
-        end
+        @owner = Owner.find_by(params[:owner_id])
+        @pets = @owner.pets
     end
     
     def create
-        if params[:owner_id]
-            @owner = Owner.find(params[:owner_id])
-            @pet = @owner.create(pet_params)
-        else 
-            @pet = Pet.create(pet_params)
-        end
+        @owner = Owner.find_by(params[:owner_id])
+        @pet = @owner.create(pet_params)
         redirect_to owner_path(@owner)
     end
 
     def show
-        if params[:owner_id]
-            @owner = Owner.find(params[:owner_id])
-            @pet = @owner.pets.find(params[:id])
-        else 
-            @pet = Pet.find(params[:id])
-        end
-        
+        @owner = Owner.find_by(params[:owner_id])
+        @pet = @owner.pets.find(params[:id])
     end
 
     def update
-        @owner = Owner.find(params[:owner_id])
+        @owner = Owner.find_by(params[:owner_id])
         @pet = @owner.find(params[:id])
         if @pet.update(req_params)
             redirect_to @pet
@@ -44,7 +27,7 @@ class PetsController < ApplicationController
     
 
     def destroy
-        @owner = Owner.find(params[:owner_id])
+        @owner = Owner.find_by(params[:owner_id])
         @pet = @owner.pets.find(params[:id])
         @pet.destroy
         redirect_to owner_path(@owner), status: 303

@@ -1,3 +1,9 @@
-<h1>Update Owner</h1>
+<h1>Editing owner</h1>
 
-<%= render 'owner', owner: @owner %>
+<%= render "form", owner: @owner %>
+
+<br>
+
+<div>
+  <%= link_to "Back to owners", owners_path %>
+</div>

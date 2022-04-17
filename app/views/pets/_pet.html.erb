@@ -1,10 +1,5 @@
-<% unless pet.archived? %>  <!--BUG RESOLVED!-->
-    <ul>
-        <li><strong><%= pet.name %></strong> <em>(<%= pet.pet_type %>)</em>
-        | <%= link_to "Remove Pet", [pet.owner, pet], data: {
-            turbo_method: :delete,
-            turbo_confirm: "Say Goodbye to your Pet?!"
-        } %></li>
-    </ul>
-    
-<% end %>
+<div id="<%= dom_id pet %>">
+  <ul>
+    <li><strong><%= link_to pet.pet_name, owner_pet_path(@owner,pet) %></strong> (<%= pet.pet_type %>)</li>
+  </ul>
+</div>

@@ -1,0 +1,55 @@
+<%= form_with(model: [ @owner, @pet ]) do |form| %>
+  <% if pet.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pet.errors.count, "error") %> prohibited this pet from being saved:</h2>
+
+      <ul>
+        <% pet.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :pet_name, style: "display: block" %>
+    <%= form.text_field :pet_name %>
+  </div>
+
+  <div>
+    <%= form.label :pet_type, style: "display: block" %>
+    <%= form.select :pet_type, ['Dog', 'Cat'], selected: 'Dog'  %>
+  </div>
+
+  <div>
+    <%= form.label :owner_id, style: "display: block" %>
+    <%= form.text_field :owner_id %>
+  </div>
+
+  <div>
+    <hr>
+    <h2>Pet Bookings</h2>
+    <%= form.fields_for :bookings do |book| %>
+      <div>
+        <%= book.label :start_date %>
+        <%= book.date_field :start_date %>
+      </div>
+      <div>
+        <%= book.label :end_date %>
+        <%= book.date_field :end_date %>
+      </div>
+      <div>
+        <%= book.label :cage_num %>
+        <%= book.number_field :cage_num %>
+      </div>
+      <div>
+        <%= book.check_box :_destroy %> DELETE
+      </div>
+      <hr>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

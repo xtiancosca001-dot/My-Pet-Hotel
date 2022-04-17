@@ -1,0 +1,24 @@
+<p style="color: green"><%= notice %></p>
+
+<h1><%=@pet.pet_name%> the <%=@pet.pet_type%></h1>
+<% if @pet.bookings.any? %>
+  <hr>
+  <h2>Bookings: </h2>
+  <% @pet.bookings.each do |booking| %> 
+    <ul>
+      <li>
+        <%= booking.start_date %> to <%= booking.end_date %> |
+        CAGE <%= booking.cage_num %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>
+
+<hr>
+
+<div>
+  <%= link_to "Edit this pet (You can add/remove bookings of your pet)", edit_owner_pet_path(@owner, @pet) %> |
+  <%= link_to "Back to owner", owner_path(@owner) %>
+
+  <%= button_to "Destroy this pet", owner_pet_path(@owner,@pet), method: :delete %>
+</div>

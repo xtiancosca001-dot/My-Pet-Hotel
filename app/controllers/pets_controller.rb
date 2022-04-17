@@ -1,53 +1,79 @@
 class PetsController < ApplicationController
-    def index
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.all
+  before_action :get_owner
+  before_action :set_pet, only: %i[ show edit update destroy ]
+
+  # GET /pets or /pets.json
+  def index
+    @pets = @owner.pets
+  end
+
+  # GET /pets/1 or /pets/1.json
+  def show
+  end
+
+  # GET /pets/new
+  def new
+    @pet = @owner.pets.build
+    @pet.bookings.build
+  end
+
+  # GET /pets/1/edit
+  def edit
+    @pet.bookings.build
+  end
+
+  # POST /pets or /pets.json
+  def create
+    @pet = @owner.pets.build(pet_params)
+
+    respond_to do |format|
+      if @pet.save
+        format.html { redirect_to owner_pet_url(@owner, @pet), notice: "Pet was successfully created." }
+        format.json { render :show, status: :created, location: @pet }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @pet.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /pets/1 or /pets/1.json
+  def update
+    respond_to do |format|
+      if @pet.update(pet_params)
+        format.html { redirect_to owner_pet_url(@owner, @pet), notice: "Pet was successfully updated." }
+        format.json { render :show, status: :ok, location: @pet }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @pet.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /pets/1 or /pets/1.json
+  def destroy
+    @pet.destroy
+
+    respond_to do |format|
+      format.html { redirect_to owner_pets_url(@owner), notice: "Pet was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_pet
+      @pet = @owner.pets.find(params[:id])
     end
 
-    def new
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pet.new
-    end
-    
-    def create
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.create(pet_params)
-        if @pet.save
-            flash[:success] = "Object was successfully updated"
-            redirect_to owners_path
-        else
-            flash[:error] = "Something went wrong"
-            render :new, status: :unprocessable_entity
-        end
+    # Only allow a list of trusted parameters through.
+    def pet_params
+      params.require(:pet).permit(:pet_name, :pet_type, :owner_id, bookings_attributes: [
+        :id, :start_date, :end_date, :cage_num, :_destroy
+      ])
     end
 
-    def edit
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.find(params[:id])
+    def get_owner
+      @owner = Owner.find(params[:owner_id])
     end
-
-    def update
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.find(params[:id])
-        if @pet.update(pet_params)
-          flash[:success] = "Object was successfully updated"
-          redirect_to owners_path
-        else
-          flash[:error] = "Something went wrong"
-          render :new, status: :unprocessable_entity
-        end
-    end
-    
-    def destroy
-        @owner = Owner.find(params[:owner_id])
-        @pet = @owner.pets.find(params[:id])
-        @pet.destroy
-        redirect_to owner_path(@owner), status: 303
-    end
-    
-
-    private
-        def pet_params
-            params.require(:pet).permit(:name, :pet_type, :status)
-        end
 end

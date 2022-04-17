@@ -1,57 +1,70 @@
 class OwnersController < ApplicationController
-    def index
-        # needs template
-        @owners = Owner.all
+  before_action :set_owner, only: %i[ show edit update destroy ]
+
+  # GET /owners or /owners.json
+  def index
+    @owners = Owner.all
+  end
+
+  # GET /owners/1 or /owners/1.json
+  def show
+  end
+
+  # GET /owners/new
+  def new
+    @owner = Owner.new
+  end
+
+  # GET /owners/1/edit
+  def edit
+  end
+
+  # POST /owners or /owners.json
+  def create
+    @owner = Owner.new(owner_params)
+
+    respond_to do |format|
+      if @owner.save
+        format.html { redirect_to owner_url(@owner), notice: "Owner was successfully created." }
+        format.json { render :show, status: :created, location: @owner }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @owner.errors, status: :unprocessable_entity }
+      end
     end
-    
-    # Create an Owner
-    def new
-        # Needs A Template
-        @owner = Owner.new
+  end
+
+  # PATCH/PUT /owners/1 or /owners/1.json
+  def update
+    respond_to do |format|
+      if @owner.update(owner_params)
+        format.html { redirect_to owner_url(@owner), notice: "Owner was successfully updated." }
+        format.json { render :show, status: :ok, location: @owner }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @owner.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /owners/1 or /owners/1.json
+  def destroy
+    @owner.destroy
+
+    respond_to do |format|
+      format.html { redirect_to owners_url, notice: "Owner was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_owner
+      @owner = Owner.find(params[:id])
     end
 
-    def create
-        # Creates an instance and redirects
-        @owner = Owner.new(req_params)
-        if @owner.save
-            flash[:success] = "Owner was successfully created"
-            redirect_to owners_path
-        else
-            flash[:error] = "Something went wrong"
-            render :new, status: :unprocessable_entity
-        end
+    # Only allow a list of trusted parameters through.
+    def owner_params
+      params.require(:owner).permit(:name, :tel_num)
     end
-
-    # Show an Onwer
-    def show
-        @owner = Owner.find(params[:id])
-    end
-    
-
-    # Edit an Owner
-    def edit
-        @owner = Owner.find(params[:id])
-    end
-
-    def update
-        @owner = Owner.find(params[:id])
-        if @owner.update(req_params)
-            redirect_to owners_path
-        else
-            render :new, status: :unprocessable_entity
-        end
-    end
-    
-    # Delete an Owner
-    def destroy
-        @owner = Owner.find(params[:id])
-        @owner.destroy
-        redirect_to owners_path, status: :see_other
-    end
-    
-    
-    private
-        def req_params
-            params.require(:owner).permit(:name, :tel_num, :status)
-        end
 end

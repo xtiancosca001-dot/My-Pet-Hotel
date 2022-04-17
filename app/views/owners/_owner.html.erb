@@ -1,20 +1,8 @@
-<%= form_with model: @owner do |owner| %>
-    <table>
-        <tr>
-            <td><%= owner.label :name %></td>
-            <td><%= owner.text_field :name %></td>
-        </tr>
-        <tr>
-            <td><%= owner.label :tel_num %></td>
-            <td><%= owner.text_field :tel_num %></td>
-        </tr>
-    </table>
-    <div>
-        <%= owner.label :status %><br>
-        <%= owner.select :status, ['public', 'private', 'archived'], selected: 'public' %>
-    </div>
-    <br>
-    <div>
-        <%= owner.submit %>
-    </div>
-<% end %>
+<div id="<%= dom_id owner %>">
+  <ul>
+    <li>
+      <strong><%= link_to owner.name, owner_path(owner) %> </strong> (<%= owner.tel_num %>)
+    </li>
+  </ul>
+  
+</div>

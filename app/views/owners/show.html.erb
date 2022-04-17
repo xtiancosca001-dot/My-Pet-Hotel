@@ -1,12 +1,19 @@
-<h1><%= @owner.name %> </h1>
+<p style="color: green"><%= notice %></p>
 
-<%= link_to "Go Back", owners_path%>
+<h1><%= @owner.name %></h1>
+<p><strong>Number of Pets Owned so far:</strong> <%= @owner.pets.count %></p>
 
-<h2>List of Pets Owned</h2>
-<%= render @owner.pets %>
-
+<div id="pets">
+  <% @owner.pets.each do |pet| %>
+    <%= render pet %>
+  <% end %>
+</div>
+<%= link_to "New pet", new_owner_pet_path(@owner,@pet) %>
 
 <hr>
-<h2>Add a pet here</h2>
-<%= render 'pets/owner_pet' %>
 
+<div>
+  <%= link_to "Edit this owner", edit_owner_path(@owner) %> |
+  <%= link_to "Back to owners", owners_path %>
+  <%= button_to "Destroy this owner", @owner, method: :delete %>
+</div>

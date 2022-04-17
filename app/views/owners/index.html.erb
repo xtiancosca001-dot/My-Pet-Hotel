@@ -1,37 +1,11 @@
-<h1>Pet Owners' Database</h1>
+<p style="color: green"><%= notice %></p>
 
-Our Organization has <%= Owner.public_count %> pet owners and counting!
+<h1>Owners</h1>
 
-<div>
-    <%= link_to "Create New Owner Here", new_owner_path %>
+<div id="owners">
+  <% @owners.each do |owner| %>
+    <%= render owner %>
+  <% end %>
 </div>
 
-<h2>Entries so far:</h2>
-<% @owners.each do |owner| %>
-    <table>
-        <tr>
-            <td> <strong>Name</strong> </td>
-            <td><%= owner.name %></td>
-        </tr>
-        <tr>
-            <td> <strong>Contact Details</strong> </td>
-            <td><%= owner.tel_num %></td>
-        </tr> 
-    </table>
-    <% if owner.archived? %>
-        ARCHIVED!!! <br>
-    <% end %>
-    <% unless owner.archived? %> <!--BUG RESOLVED!-->
-        <div>
-            <%= link_to "SHOW", owner_path(owner) %> | <%= link_to "EDIT", edit_owner_path(owner) %> | 
-            <%= link_to "DELETE", owner_path(owner), data: {
-                turbo_method: "DELETE",
-                turbo_confirm: "ARE YOU SURE?!"
-            } %>
-        </div> 
-    <% end %>
-    
-    <br>
-<% end %>
-
-
+<%= link_to "New owner", new_owner_path %>

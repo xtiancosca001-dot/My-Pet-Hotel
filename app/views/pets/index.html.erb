@@ -1,1 +1,11 @@
-<h1>PET SITE</h1>
+<p style="color: green"><%= notice %></p>
+
+<h1><%= @owner.name %>'s Pets</h1>
+
+<div id="pets">
+  <% @pets.each do |pet| %>
+    <%= render pet %>
+  <% end %>
+</div>
+
+<%= link_to "New pet", new_owner_pet_path(@owner,@pet) %> | <%= link_to "Back to owner", owner_path(@owner) %>
